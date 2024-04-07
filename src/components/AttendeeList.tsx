@@ -10,6 +10,7 @@ import {
 import IconButton from "./IconButton";
 import Table from "./Table/Table";
 import { TableHeader } from "./Table/TableHeader";
+import { TableCell } from "./Table/TableCell";
 
 const AttendeeList = () => {
   return (
@@ -45,30 +46,26 @@ const AttendeeList = () => {
           {Array.from({ length: 10 }).map((_, i) => {
             return (
               <tr key={i} className="border-b border-white/10 hover:bg-white/5">
-                <td className="py-3 px-4 text-small text-zinc-300">
+                <TableCell>
                   <input
                     type="checkbox"
                     className="size-4 bg-black/20 rounded border border-white/10"
                   />
-                </td>
-                <td className="py-3 px-4 text-small text-zinc-300">12345</td>
-                <td className="py-3 px-4 text-small text-zinc-300">
+                </TableCell>
+                <TableCell>12345</TableCell>
+                <TableCell>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-white">Juliana</span>
                     <span>juliana@email</span>
                   </div>
-                </td>
-                <td className="py-3 px-4 text-small text-zinc-300">
-                  7 dias atrás
-                </td>
-                <td className="py-3 px-4 text-small text-zinc-300">
-                  3 dias atáras
-                </td>
-                <td className="py-3 px-4 text-small text-zinc-300">
+                </TableCell>
+                <TableCell>7 dias atrás</TableCell>
+                <TableCell>3 dias atáras</TableCell>
+                <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4 " />
                   </IconButton>
-                </td>
+                </TableCell>
               </tr>
             );
           })}
@@ -76,11 +73,9 @@ const AttendeeList = () => {
 
         <tfoot>
           <tr>
-            <td className="py-3 px-4 text-small text-zinc-300" colSpan={3}>
-              Mostrando 10 de 200 itens
-            </td>
-            <td
-              className="py-3 px-4 text-small text-zinc-300 text-right"
+            <TableCell colSpan={3}>Mostrando 10 de 200 itens</TableCell>
+            <TableCell
+              className=" text-right"
               colSpan={3}
             >
               <div className="inline-flex items-center gap-8">
@@ -100,7 +95,7 @@ const AttendeeList = () => {
                   </IconButton>
                 </div>
               </div>
-            </td>
+            </TableCell>
           </tr>
         </tfoot>
       </Table>
