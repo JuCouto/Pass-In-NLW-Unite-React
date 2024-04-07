@@ -11,6 +11,7 @@ import IconButton from "./IconButton";
 import Table from "./Table/Table";
 import { TableHeader } from "./Table/TableHeader";
 import { TableCell } from "./Table/TableCell";
+import { TableRow } from "./Table/TableRow";
 
 const AttendeeList = () => {
   return (
@@ -45,7 +46,7 @@ const AttendeeList = () => {
         <tbody>
           {Array.from({ length: 10 }).map((_, i) => {
             return (
-              <tr key={i} className="border-b border-white/10 hover:bg-white/5">
+              <TableRow key={i}>
                 <TableCell>
                   <input
                     type="checkbox"
@@ -59,20 +60,20 @@ const AttendeeList = () => {
                     <span>juliana@email</span>
                   </div>
                 </TableCell>
-                <TableCell>7 dias atrás</TableCell>
+                <TableCell>7 dias TableRowás</TableCell>
                 <TableCell>3 dias atáras</TableCell>
                 <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4 " />
                   </IconButton>
                 </TableCell>
-              </tr>
+              </TableRow>
             );
           })}
         </tbody>
 
         <tfoot>
-          <tr>
+          <TableRow>
             <TableCell colSpan={3}>Mostrando 10 de 200 itens</TableCell>
             <TableCell
               className=" text-right"
@@ -96,7 +97,7 @@ const AttendeeList = () => {
                 </div>
               </div>
             </TableCell>
-          </tr>
+          </TableRow>
         </tfoot>
       </Table>
     </div>
