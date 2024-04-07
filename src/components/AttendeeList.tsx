@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -12,8 +12,12 @@ import Table from "./Table/Table";
 import { TableHeader } from "./Table/TableHeader";
 import { TableCell } from "./Table/TableCell";
 import { TableRow } from "./Table/TableRow";
+// import { Attendees } from "../data/attendees.ts";
+import { Attendees } from "../data/Attendees";
 
 const AttendeeList = () => {
+  const [search, setSearch] = useState()
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-3 items-center">
@@ -44,24 +48,24 @@ const AttendeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 10 }).map((_, i) => {
+          {Attendees.map((attendee) => {
             return (
-              <TableRow key={i}>
+              <TableRow key={attendee.id}>
                 <TableCell>
                   <input
                     type="checkbox"
                     className="size-4 bg-black/20 rounded border border-white/10"
                   />
                 </TableCell>
-                <TableCell>12345</TableCell>
+                <TableCell>{attendee.id}</TableCell>
                 <TableCell>
                   <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-white">Juliana</span>
-                    <span>juliana@email</span>
+                    <span className="font-semibold text-white">{attendee.name}</span>
+                    <span>{attendee.email}</span>
                   </div>
                 </TableCell>
-                <TableCell>7 dias TableRowás</TableCell>
-                <TableCell>3 dias atáras</TableCell>
+                <TableCell>{attendee.createdAt.toISOString()}</TableCell>
+                <TableCell>{attendee.checkedInAt.toISOString()}</TableCell>
                 <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4 " />

@@ -29,7 +29,11 @@
   - npm install -D @tailwindcss/forms
 
 - Tailwind merge (pacote para poder unir "className")
+
   - npm i tailwind-merge
+
+- FakerJs (lib para gerar dados falsos)
+  - npm install @faker-js/faker --save-dev
 
 <h4 align="center">  Vite </h4>
 
