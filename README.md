@@ -33,7 +33,11 @@
   - npm i tailwind-merge
 
 - FakerJs (lib para gerar dados falsos)
+
   - npm install @faker-js/faker --save-dev
+
+- Date FNS (para formatar datas)
+  - npm install date-fns
 
 <h4 align="center">  Vite </h4>
 
