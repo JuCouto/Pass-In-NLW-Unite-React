@@ -1,4 +1,10 @@
-<h1 align="center">PASS-IN </h1>
+<h1 align="center"><i>PASS-IN </h1>
+
+<h4 align="center">  
+	
+![Alt text](https://github.com/JuCouto/PassIn-nlwUniteReact/assets/100319483/e8351a7c-d197-47ad-8563-9a4838abec4e)
+
+</h4>
 
 <h4 align="center">  
 	
@@ -52,7 +58,7 @@
 <h4 align="center">  Paginação </h4>
 
 No trecho do código em AttendeeList.tsx:
-{Attendees.slice((page - 1) _ 10, page _ 10).map((attendee) => {
+{Attendees.slice((page - 1) * 10, page * 10).map((attendee) => {
 
 se inicia a lógica de páginação. o slice vai fatiar os arquivos seguindo a regra recebida como parâmetro, ele pega page -1 e depois multiplica o page por 10.
 por ex: page = 1. slice(1 - 1 (igual a 0), 1 \* 10 (igual a 10), então os arquivos apresentados serão de 1 a 10.
