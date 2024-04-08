@@ -36,8 +36,12 @@
 
   - npm install @faker-js/faker --save-dev
 
-- Date FNS (para formatar datas)
+- Date FNS (para formatar datas, lib removida)
+
   - npm install date-fns
+
+- DayJs (para formatar datas, a date fns não funcionou da forma que ele esperava)
+  - npm install dayjs
 
 <h4 align="center">  Vite </h4>
 

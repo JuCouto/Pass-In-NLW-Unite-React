@@ -17,8 +17,11 @@ import { TableRow } from "./Table/TableRow";
 import { Attendees } from "../data/Attendees";
 
 //Formatar datas
-import { formatRelative } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/pt-br'
+dayjs.extend(relativeTime)
+dayjs.locale("pt-br");
 
 const AttendeeList = () => {
   const [search, setSearch] = useState()
@@ -69,8 +72,8 @@ const AttendeeList = () => {
                     <span>{attendee.email}</span>
                   </div>
                 </TableCell>
-                <TableCell>{formatRelative(attendee.createdAt, new Date(), { locale: ptBR })}</TableCell>
-                <TableCell>{formatRelative(attendee.checkedInAt, new Date(), { locale: ptBR })}</TableCell>
+                <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
+                <TableCell>{dayjs().to(attendee.checkedInAt)}</TableCell>
                 <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4 " />
