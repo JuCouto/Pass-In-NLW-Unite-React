@@ -2,7 +2,7 @@
 
 <h4 align="center">  
 	
-	Aplicação de um Sistema Web para gerenciamento de Eventos e Participantes.
+	Aplicação de uma aplicação Web para gerenciamento de Eventos e Participantes.
 
 </h4>
 
@@ -16,7 +16,13 @@
 | TailwindCss |        |
 |             |        |
 |             |        |
-|             |        |
+
+##### Como Executar o código
+
+- Para executar o código localmente, clone o reositório.
+- Acesse a pasta do projeto no vscodee execute os comandos:
+  - npm install
+  - npm run dev ( para rodar a aplicação)
 
 ### Pacotes:
 
@@ -56,5 +62,13 @@ No trecho do código em AttendeeList.tsx:
 
 se inicia a lógica de páginação. o slice vai fatiar os arquivos seguindo a regra recebida como parâmetro, ele pega page -1 e depois multiplica o page por 10.
 por ex: page = 1. slice(1 - 1 (igual a 0), 1 \* 10 (igual a 10), então os arquivos apresentados serão de 1 a 10.
+
+<h4 align="center">  Repositório da API em NodeJS </h4>
+
+- Clonar o repositório para a sua máquina.
+
+https://github.com/rocketseat-education/nlw-unite-nodejs
+
+</h4>
 
 \*\* pesquisar como trocar a cor de fundo do checkbox usando o tailwind/forms
