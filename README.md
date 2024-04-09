@@ -7,7 +7,7 @@
 </h4>
 
 <h4 align="center">  
-	Aplicação de uma aplicação Web para gerenciamento de Eventos e Participantes.
+	Aplicação Web para gerenciamento de Eventos e Participantes.
 </h4>
 
 ### Tecnologias utilizadas.
@@ -21,9 +21,9 @@
 |             |        |
 |             |        |
 
-##### Como Executar o código
+#### Como Executar o código
 
-- Para executar o código localmente, clone o reositório.
+- Para executar o código localmente, clone o repositório.
 - Acesse a pasta do projeto no vscodee execute os comandos:
   - npm install
   - npm run dev ( para rodar a aplicação)
