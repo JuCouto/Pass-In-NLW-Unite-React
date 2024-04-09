@@ -2,13 +2,12 @@
 
 <h4 align="center">  
 	
-	Aplicação de uma aplicação Web para gerenciamento de Eventos e Participantes.
 ![Alt text](https://github.com/JuCouto/PassIn-nlwUniteReact/assets/100319483/e8351a7c-d197-47ad-8563-9a4838abec4e)
 
 </h4>
 
 <h4 align="center">  
-	Aplicação de um Sistema Web para gerenciamento de Eventos e Participantes.
+	Aplicação de uma aplicação Web para gerenciamento de Eventos e Participantes.
 </h4>
 
 ### Tecnologias utilizadas.
