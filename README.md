@@ -60,7 +60,7 @@
   - https://github.com/rocketseat-education/nlw-unite-nodejs
 - Abrir no editor de código.
 - Criar um arquivo .env na raiz do projeto e passar dentro dele:
-   ```DATABASE_URL="file:./dev.db" ```
+   ```DATABASE_URL="file://./dev.db"  ```
 - Rodar:
   - npm install ( vai instalar as dependências necessárias)
   - npx prisma db seed (vai alimentar o banco de dados com alguns dados ficticios)
