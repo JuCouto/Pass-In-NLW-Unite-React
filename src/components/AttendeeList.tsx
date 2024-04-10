@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -33,30 +33,33 @@ interface Attendee {
 }
 
 const AttendeeList = () => {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [attendees, setAttendees] = useState<Attendee[]>([]); // em typescript é obrigatório criar u interface e informar o tipo do array
 
   const totalPages = Math.ceil(attendees.length / 10);
 
   useEffect(() => {
-    const url = new URL(`http://localhost:8080/events/attendees/6a905ed9-6d92-4695-a887-dd79444c9a36`)
+    const url = new URL(
+      `http://localhost:8080/events/attendees/6a905ed9-6d92-4695-a887-dd79444c9a36`
+    );
 
-    url.searchParams.set('query', 'juliana')
-    fetch(url
+    if (search.length > 0) {
+      url.searchParams.set("query", search);
+    }
 
-
-    ).then((response) => response.json()) //response.json converte a resposta da api em json.
+    fetch(url)
+      .then((response) => response.json()) //response.json converte a resposta da api em json.
       .then((data) => {
         console.log(data, "data");
         setAttendees(data.attendees);
       });
-  }, [page]);
+  }, [page, search]);
 
-  // function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
-  //   setCurrentSearch(event.target.value);
-  //   setCurrentPage(1);
-  // }
+  function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value);
+    setPage(1);
+  }
 
   function goToNextPage() {
     setPage(page + 1);
@@ -82,6 +85,7 @@ const AttendeeList = () => {
           <input
             className="bg-transparent focus:ring-0 flex-1 outline-none border-0 p-0 text-sm"
             placeholder="Buscar Participante..."
+            onChange={onSearchInputChanged}
           />
         </div>
       </div>
@@ -123,11 +127,14 @@ const AttendeeList = () => {
                   </div>
                 </TableCell>
                 <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
-                <TableCell> {attendee.checkedInAt == null ? (
-                  <span className="text-zinc-400">Não fez check-in</span>
-                ) : (
-                  dayjs().to(attendee.checkedInAt)
-                )}</TableCell>
+                <TableCell>
+                  {" "}
+                  {attendee.checkedInAt == null ? (
+                    <span className="text-zinc-400">Não fez check-in</span>
+                  ) : (
+                    dayjs().to(attendee.checkedInAt)
+                  )}
+                </TableCell>
                 <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4 " />
