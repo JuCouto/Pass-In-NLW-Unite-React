@@ -12,22 +12,26 @@
 
 ### Tecnologias utilizadas.
 
-|  Frontend   | Mobile |
-| :---------: | :----: |
-|    React    |        |
-|    Vite     |        |
-| TypeScript  |        |
-| TailwindCss |        |
-|             |        |
+|Backend |  Frontend   | Mobile |
+| :----: | :---------: | :----: |
+|   Java |    React    |        |
+|        |    Vite     |        |
+|        | TypeScript  |        |
+|        | TailwindCss |        |
+|        |             |        |
 
 ### Como Executar o código
 
 - Para executar o código localmente, clone o repositório.
-- Acesse a pasta do projeto no vscodee execute os comandos:
+
+  #### Frontend
+- Abra a pasta do projeto nlw-unite-react, no terminal execute os comandos:
   - npm install
   - npm run dev ( para rodar a aplicação)
 
-### Pacotes:
+  #### Backend
+ 
+### Pacotes Frontend:
 
 - Lucide (pacote de ícones):
 
@@ -52,41 +56,21 @@
 - DayJs (para formatar datas, a date fns não funcionou da forma que ele esperava)
   - npm install dayjs
 
-### Como executar a API localmente
 
-##### Repositório da API em NodeJS :
-  
-- Clonar o repositório para a sua máquina:
-  - https://github.com/rocketseat-education/nlw-unite-nodejs
-- Abrir no editor de código.
-- Criar um arquivo .env na raiz do projeto e passar dentro dele:
-   ```DATABASE_URL="file://./dev.db"  ```
-- Rodar:
-  - npm install ( vai instalar as dependências necessárias)
-  - npx prisma db seed (vai alimentar o banco de dados com alguns dados ficticios)
-
-* Caso dê o erro ( bad option:--env-file) ao rodar o npm run dev, passar essa configuração para o script dentro do package.json:
-  ```
-  "scripts": {
-    "start": "node dist/server.mjs",
-    "build": "tsup src --format esm",
-    "dev": "set TS_NODE_PROJECT=tsconfig.json && tsx watch src/server.ts",
-    "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio"
-  },
-- A mensagem de sucesso é **HTTP server running!**
 
 #### Documentação da API (Swagger)
+ - A documentação é a fornecida pela RocketSeat, ela aparentemente é baseada no código em node, os endpoints em react estão diferentes.
+
 Para documentação da API, acesse o link: https://nlw-unite-nodejs.onrender.com/docs
 
 
-<h4 align="center">  Vite </h4>
+#### Vite
 
-    - O Vite é uma ferramenta que permite utilizar o javascript mais moderno possível dentro do navegador,sem se preocupar com compatibilidade hmr.
-    - Um dos benefícios é poder atualizar algo no código e ser refletido imediatamente no navegador.
-    - Pode ser utilizado com outras linguagens como vue e angular.
+ - O Vite é uma ferramenta que permite utilizar o javascript mais moderno possível dentro do navegador,sem se preocupar com compatibilidade hmr.
+ - Um dos benefícios é poder atualizar algo no código e ser refletido imediatamente no navegador.
+ - Pode ser utilizado com outras linguagens como vue e angular.
 
-<h4 align="center">  Paginação no Front</h4>
+#### Paginação no Front
 
 No trecho do código em AttendeeList.tsx:
 {Attendees.slice((page - 1) _ 10, page _ 10).map((attendee) => {
@@ -96,6 +80,9 @@ por ex: page = 1. slice(1 - 1 (igual a 0), 1 \* 10 (igual a 10), então os arqui
 
 #### Observações:
 
-- A paginação está vindo da API.
-- 
-\*\* pesquisar como trocar a cor de fundo do checkbox usando o tailwind/forms
+- Foram realizadas melhorias na API para suprir o componente search.
+
+  
+- Ajustar paginação no backend.
+- Adicionar swagger no backend.
+- pesquisar como trocar a cor de fundo do checkbox usando o tailwind/forms
