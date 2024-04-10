@@ -35,6 +35,7 @@ interface Attendee {
 const AttendeeList = () => {
   const [attendees, setAttendees] = useState<Attendee[]>([]); // em typescript é obrigatório criar u interface e informar o tipo do array
   const totalPages = Math.ceil(attendees.length / 10);
+  const [selectedListId, setSelectedListId] = React.useState<readonly string[]>([]);
 
   const [page, setPage] = useState(() => {
     const url = new URL(window.location.toString());
@@ -55,6 +56,8 @@ const AttendeeList = () => {
 
     return "";
   });
+
+  const isSelected = (id: string) => selectedListId.indexOf(id) !== -1;
 
   useEffect(() => {
     const url = new URL(
@@ -111,6 +114,35 @@ const AttendeeList = () => {
   function goToLastPage() {
     setCurrentPage(totalPages);
   }
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelected = attendees.map((n) => n.id);
+      setSelectedListId(newSelected);
+
+      return;
+    }
+    setSelectedListId([]);
+  };
+
+  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+    const selectedIndex = selectedListId.indexOf(id);
+    let newSelected: readonly string[] = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selectedListId, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selectedListId.slice(1));
+    } else if (selectedIndex === selectedListId.length - 1) {
+      newSelected = newSelected.concat(selectedListId.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selectedListId.slice(0, selectedIndex),
+        selectedListId.slice(selectedIndex + 1),
+      );
+    }
+    setSelectedListId(newSelected);
+
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -134,6 +166,7 @@ const AttendeeList = () => {
               <input
                 type="checkbox"
                 className="size-4 bg-black/20 rounded border border-white/10"
+                onChange={handleSelectAllClick}
               />
             </TableHeader>
             <TableHeader>Código</TableHeader>
@@ -144,14 +177,17 @@ const AttendeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {attendees.slice((page - 1) * 10, page * 10).map((attendee) => {
+          {attendees.slice((page - 1) * 10, page * 10).map((attendee, index) => {
+            const isItemSelected = isSelected(attendee.id);
+
             return (
               <TableRow key={attendee.id}>
                 <TableCell>
                   <input
                     type="checkbox"
                     className="size-4 bg-black/20 rounded border border-white/10"
-                  // onChange={onSearchInputChanged}
+                    checked={isItemSelected}
+                    onClick={(event) => handleClick(event, attendee.id)}
                   />
                 </TableCell>
                 <TableCell>{attendee.id}</TableCell>
