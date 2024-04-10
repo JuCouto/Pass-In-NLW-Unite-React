@@ -33,7 +33,6 @@ interface Attendee {
 }
 
 const AttendeeList = () => {
-  const [search, setSearch] = useState("");
   const [attendees, setAttendees] = useState<Attendee[]>([]); // em typescript é obrigatório criar u interface e informar o tipo do array
   const totalPages = Math.ceil(attendees.length / 10);
 
@@ -45,6 +44,16 @@ const AttendeeList = () => {
     }
 
     return 1;
+  });
+
+  const [search, setSearch] = useState(() => {
+    const url = new URL(window.location.toString());
+
+    if (url.searchParams.has("search")) {
+      return url.searchParams.get("search") ?? "";
+    }
+
+    return "";
   });
 
   useEffect(() => {
@@ -64,8 +73,18 @@ const AttendeeList = () => {
   }, [page, search]);
 
   function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
-    setSearch(event.target.value);
-    setPage(1);
+    setCurrentSearch(event.target.value);
+    setCurrentPage(1);
+  }
+
+  function setCurrentSearch(search: string) {
+    const url = new URL(window.location.toString());
+
+    url.searchParams.set("search", search);
+
+    window.history.pushState({}, "", url);
+
+    setSearch(search);
   }
 
   function setCurrentPage(page: number) {
@@ -78,9 +97,8 @@ const AttendeeList = () => {
     setPage(page);
   }
 
-
   function goToNextPage() {
-    setCurrentPage(page + 1)
+    setCurrentPage(page + 1);
   }
   function goToPreviousPage() {
     setCurrentPage(page - 1);
@@ -103,6 +121,7 @@ const AttendeeList = () => {
           <input
             className="bg-transparent focus:ring-0 flex-1 outline-none border-0 p-0 text-sm"
             placeholder="Buscar Participante..."
+            value={search}
             onChange={onSearchInputChanged}
           />
         </div>
