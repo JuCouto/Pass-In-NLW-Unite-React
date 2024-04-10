@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -14,20 +14,47 @@ import { TableCell } from "./Table/TableCell";
 import { TableRow } from "./Table/TableRow";
 
 //Api temporária
-import { Attendees } from "../data/Attendees";
+// import { Attendees } from "../data/Attendees";
 
 //Formatar datas
 import dayjs from "dayjs";
-import relativeTime from 'dayjs/plugin/relativeTime';
-import 'dayjs/locale/pt-br'
-dayjs.extend(relativeTime)
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/pt-br";
+import { Attendees } from "./../data/Attendees";
+dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 
-const AttendeeList = () => {
-  const [search, setSearch] = useState()
-  const [page, setPage] = useState(1)
+interface Attendee {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+  checkedInAt: string | null;
+}
 
-  const totalPages = Math.ceil(Attendees.length / 10);
+const AttendeeList = () => {
+  const [search, setSearch] = useState();
+  const [page, setPage] = useState(1);
+  const [attendees, setAttendees] = useState<Attendee[]>([]); // em typescript é obrigatório criar u interface e informar o tipo do array
+
+  const totalPages = Math.ceil(attendees.length / 10);
+
+  useEffect(() => {
+
+    fetch(
+      "http://localhost:8080/events/attendees/6a905ed9-6d92-4695-a887-dd79444c9a36"//o id esta fixo, é o id de um evento que foi deixado para ser copiado na api de node em seed.ts / eventId
+
+    ).then((response) => response.json()) //response.json converte a resposta da api em json.
+      .then((data) => {
+        console.log(data, "data");
+        setAttendees(data.attendees);
+      });
+  }, [page]);
+
+  // function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
+  //   setCurrentSearch(event.target.value);
+  //   setCurrentPage(1);
+  // }
 
   function goToNextPage() {
     setPage(page + 1);
@@ -74,24 +101,31 @@ const AttendeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {Attendees.slice((page - 1) * 10, page * 10,).map((attendee) => {
+          {attendees.slice((page - 1) * 10, page * 10).map((attendee) => {
             return (
               <TableRow key={attendee.id}>
                 <TableCell>
                   <input
                     type="checkbox"
                     className="size-4 bg-black/20 rounded border border-white/10"
+                  // onChange={onSearchInputChanged}
                   />
                 </TableCell>
                 <TableCell>{attendee.id}</TableCell>
                 <TableCell>
                   <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-white">{attendee.name}</span>
+                    <span className="font-semibold text-white">
+                      {attendee.name}
+                    </span>
                     <span>{attendee.email}</span>
                   </div>
                 </TableCell>
                 <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
-                <TableCell>{dayjs().to(attendee.checkedInAt)}</TableCell>
+                <TableCell> {attendee.checkedInAt == null ? (
+                  <span className="text-zinc-400">Não fez check-in</span>
+                ) : (
+                  dayjs().to(attendee.checkedInAt)
+                )}</TableCell>
                 <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4 " />
@@ -104,15 +138,16 @@ const AttendeeList = () => {
 
         <tfoot>
           <TableRow>
-            <TableCell colSpan={3}>Mostrando 10 de {Attendees.length} itens</TableCell>
-            <TableCell
-              className=" text-right"
-              colSpan={3}
-            >
+            <TableCell colSpan={3}>
+              Mostrando 10 de {attendees.length} itens
+            </TableCell>
+            <TableCell className=" text-right" colSpan={3}>
               <div className="inline-flex items-center gap-8">
                 {/* calculo para arrendondar o número de ´páginas pode ser adicionado aqui ou na variável
                 aqui ficaria assim  Math.ceil(Attendees.length / 10)*/}
-                <span>Página {page} de {totalPages} </span>
+                <span>
+                  Página {page} de {totalPages}{" "}
+                </span>
                 <div className="flex gap-1.5">
                   <IconButton onClick={goToFirstPage} disabled={page === 1}>
                     <ChevronsLeft className="size-4 " />
@@ -120,10 +155,16 @@ const AttendeeList = () => {
                   <IconButton onClick={goToPreviousPage} disabled={page === 1}>
                     <ChevronLeft className="size-4 " />
                   </IconButton>
-                  <IconButton onClick={goToNextPage} disabled={page === totalPages}>
+                  <IconButton
+                    onClick={goToNextPage}
+                    disabled={page === totalPages}
+                  >
                     <ChevronRight className="size-4 " />
                   </IconButton>
-                  <IconButton onClick={goToLastPage} disabled={page === totalPages}>
+                  <IconButton
+                    onClick={goToLastPage}
+                    disabled={page === totalPages}
+                  >
                     <ChevronsRight className="size-4 " />
                   </IconButton>
                 </div>
