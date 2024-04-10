@@ -34,10 +34,18 @@ interface Attendee {
 
 const AttendeeList = () => {
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
   const [attendees, setAttendees] = useState<Attendee[]>([]); // em typescript é obrigatório criar u interface e informar o tipo do array
-
   const totalPages = Math.ceil(attendees.length / 10);
+
+  const [page, setPage] = useState(() => {
+    const url = new URL(window.location.toString());
+
+    if (url.searchParams.has("page")) {
+      return Number(url.searchParams.get("page"));
+    }
+
+    return 1;
+  });
 
   useEffect(() => {
     const url = new URL(
@@ -51,7 +59,6 @@ const AttendeeList = () => {
     fetch(url)
       .then((response) => response.json()) //response.json converte a resposta da api em json.
       .then((data) => {
-        console.log(data, "data");
         setAttendees(data.attendees);
       });
   }, [page, search]);
@@ -61,19 +68,30 @@ const AttendeeList = () => {
     setPage(1);
   }
 
+  function setCurrentPage(page: number) {
+    const url = new URL(window.location.toString());
+
+    url.searchParams.set("page", String(page));
+
+    window.history.pushState({}, "", url);
+
+    setPage(page);
+  }
+
+
   function goToNextPage() {
-    setPage(page + 1);
+    setCurrentPage(page + 1)
   }
   function goToPreviousPage() {
-    setPage(page - 1);
+    setCurrentPage(page - 1);
   }
 
   function goToFirstPage() {
-    setPage(1);
+    setCurrentPage(1);
   }
 
   function goToLastPage() {
-    setPage(totalPages);
+    setCurrentPage(totalPages);
   }
 
   return (
