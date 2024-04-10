@@ -40,9 +40,11 @@ const AttendeeList = () => {
   const totalPages = Math.ceil(attendees.length / 10);
 
   useEffect(() => {
+    const url = new URL(`http://localhost:8080/events/attendees/6a905ed9-6d92-4695-a887-dd79444c9a36`)
 
-    fetch(
-      "http://localhost:8080/events/attendees/6a905ed9-6d92-4695-a887-dd79444c9a36"//o id esta fixo, é o id de um evento que foi deixado para ser copiado na api de node em seed.ts / eventId
+    url.searchParams.set('query', 'juliana')
+    fetch(url
+
 
     ).then((response) => response.json()) //response.json converte a resposta da api em json.
       .then((data) => {
