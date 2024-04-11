@@ -1,0 +1,61 @@
+{
+  "hash": "f85bda4d",
+  "configHash": "b856455b",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "27ac1571",
+  "optimized": {
+    "dayjs": {
+      "src": "../../node_modules/dayjs/dayjs.min.js",
+      "file": "dayjs.js",
+      "fileHash": "bbdbef36",
+      "needsInterop": true
+    },
+    "dayjs/locale/pt-br": {
+      "src": "../../node_modules/dayjs/locale/pt-br.js",
+      "file": "dayjs_locale_pt-br.js",
+      "fileHash": "7c6feb6b",
+      "needsInterop": true
+    },
+    "dayjs/plugin/relativeTime": {
+      "src": "../../node_modules/dayjs/plugin/relativeTime.js",
+      "file": "dayjs_plugin_relativeTime.js",
+      "fileHash": "2b4a0bf3",
+      "needsInterop": true
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "085440b0",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "794e4076",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "a91104b2",
+      "needsInterop": true
+    },
+    "tailwind-merge": {
+      "src": "../../node_modules/tailwind-merge/dist/bundle-mjs.mjs",
+      "file": "tailwind-merge.js",
+      "fileHash": "46d1340c",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-Q7C6LZZC": {
+      "file": "chunk-Q7C6LZZC.js"
+    },
+    "chunk-FQO5W7GE": {
+      "file": "chunk-FQO5W7GE.js"
+    },
+    "chunk-ZS7NZCD4": {
+      "file": "chunk-ZS7NZCD4.js"
+    }
+  }
+}
