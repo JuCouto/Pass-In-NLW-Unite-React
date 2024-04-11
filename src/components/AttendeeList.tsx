@@ -35,7 +35,9 @@ interface Attendee {
 const AttendeeList = () => {
   const [attendees, setAttendees] = useState<Attendee[]>([]); // em typescript é obrigatório criar u interface e informar o tipo do array
   const totalPages = Math.ceil(attendees.length / 10);
-  const [selectedListId, setSelectedListId] = React.useState<readonly string[]>([]);
+  const [selectedListId, setSelectedListId] = React.useState<readonly string[]>(
+    []
+  );
 
   const [page, setPage] = useState(() => {
     const url = new URL(window.location.toString());
@@ -137,11 +139,10 @@ const AttendeeList = () => {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selectedListId.slice(0, selectedIndex),
-        selectedListId.slice(selectedIndex + 1),
+        selectedListId.slice(selectedIndex + 1)
       );
     }
     setSelectedListId(newSelected);
-
   };
 
   return (
@@ -165,7 +166,12 @@ const AttendeeList = () => {
             <TableHeader style={{ width: 64 }}>
               <input
                 type="checkbox"
-                className="size-4 bg-black/20 rounded border border-white/10"
+                id="checkbox-1"
+                className="size-5 bg-black/20 rounded border border-orange-400/50
+                         checked:bg-orange-400
+                           hover:ring
+                         hover:ring-orange-300 
+                           focus:outline-none "
                 onChange={handleSelectAllClick}
               />
             </TableHeader>
@@ -177,45 +183,52 @@ const AttendeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {attendees.slice((page - 1) * 10, page * 10).map((attendee, index) => {
-            const isItemSelected = isSelected(attendee.id);
+          {attendees
+            .slice((page - 1) * 10, page * 10)
+            .map((attendee, index) => {
+              const isItemSelected = isSelected(attendee.id);
 
-            return (
-              <TableRow key={attendee.id}>
-                <TableCell>
-                  <input
-                    type="checkbox"
-                    className="size-4 bg-black/20 rounded border border-white/10"
-                    checked={isItemSelected}
-                    onClick={(event) => handleClick(event, attendee.id)}
-                  />
-                </TableCell>
-                <TableCell>{attendee.id}</TableCell>
-                <TableCell>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-white">
-                      {attendee.name}
-                    </span>
-                    <span>{attendee.email}</span>
-                  </div>
-                </TableCell>
-                <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
-                <TableCell>
-                  {" "}
-                  {attendee.checkedInAt == null ? (
-                    <span className="text-zinc-400">Não fez check-in</span>
-                  ) : (
-                    dayjs().to(attendee.checkedInAt)
-                  )}
-                </TableCell>
-                <TableCell>
-                  <IconButton transparent>
-                    <MoreHorizontal className="size-4 " />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            );
-          })}
+              return (
+                <TableRow key={attendee.id}>
+                  <TableCell>
+                    <input
+                      type="checkbox"
+                      className="size-5 bg-black/20 rounded border border-orange-400/50
+                               checked:bg-orange-400
+                                 hover:ring
+                               hover:ring-orange-300 
+                                 focus:outline-none "
+
+                      checked={isItemSelected}
+                      onClick={(event) => handleClick(event, attendee.id)}
+                    />
+                  </TableCell>
+                  <TableCell>{attendee.id}</TableCell>
+                  <TableCell>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-semibold text-white">
+                        {attendee.name}
+                      </span>
+                      <span>{attendee.email}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
+                  <TableCell>
+                    {" "}
+                    {attendee.checkedInAt == null ? (
+                      <span className="text-zinc-400">Não fez check-in</span>
+                    ) : (
+                      dayjs().to(attendee.checkedInAt)
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <IconButton transparent>
+                      <MoreHorizontal className="size-4 " />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
         </tbody>
 
         <tfoot>
