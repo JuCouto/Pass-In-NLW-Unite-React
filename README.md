@@ -7,7 +7,7 @@
 </h4>
 
 <h4 align="center">  
-	Aplicação Web para gerenciamento de Eventos e Participantes.
+	Aplicação Web para gerenciamento de Eventos e Participantes e App para participante realizar o cadastro em um evento ou retirar a credencial de um evento.
 </h4>
 
 ### Tecnologias utilizadas.
@@ -58,8 +58,16 @@
 
 ##### Get todos os participantes vinculados ao evento
 - http://localhost:8080/events/attendees/{id_do_evento}
-  
-### Pacotes Frontend:
+
+#### Documentação da API (Swagger)
+ - A documentação é a fornecida pela RocketSeat, ela aparentemente é baseada no código em node, os endpoints em react estão diferentes.
+
+Para documentação da API, acesse o link: https://nlw-unite-nodejs.onrender.com/docs
+
+<br>
+<details>
+<Summary>LIBS UTILIZADAS NA APLICAÇÂO WEB</Summary>
+
 
 - Lucide (pacote de ícones):
 
@@ -84,27 +92,29 @@
 - DayJs (para formatar datas, a date fns não funcionou da forma que ele esperava)
   - npm install dayjs
 
+</details>
 
 
-#### Documentação da API (Swagger)
- - A documentação é a fornecida pela RocketSeat, ela aparentemente é baseada no código em node, os endpoints em react estão diferentes.
-
-Para documentação da API, acesse o link: https://nlw-unite-nodejs.onrender.com/docs
-
-
-#### Vite
+<br>
+<details>
+<Summary>VITE</Summary>
 
  - O Vite é uma ferramenta que permite utilizar o javascript mais moderno possível dentro do navegador,sem se preocupar com compatibilidade hmr.
  - Um dos benefícios é poder atualizar algo no código e ser refletido imediatamente no navegador.
  - Pode ser utilizado com outras linguagens como vue e angular.
+</details>
 
-#### Paginação no Front
+<br>
+<details>
+<Summary>PAGINAÇÃO NO FRONT</Summary>
 
 No trecho do código em AttendeeList.tsx:
 {Attendees.slice((page - 1) _ 10, page _ 10).map((attendee) => {
 
 se inicia a lógica de páginação. o slice vai fatiar os arquivos seguindo a regra recebida como parâmetro, ele pega page -1 e depois multiplica o page por 10.
 por ex: page = 1. slice(1 - 1 (igual a 0), 1 \* 10 (igual a 10), então os arquivos apresentados serão de 1 a 10.
+
+</details>
 
 #### Observações:
 
