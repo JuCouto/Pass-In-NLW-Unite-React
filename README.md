@@ -12,10 +12,10 @@
 
 ### Tecnologias utilizadas.
 
-|Backend |  Frontend   | Mobile |
-| :----: | :---------: | :----: |
-|   Java |    React    |        |
-|        |    Vite     |        |
+|Backend |  Frontend   | Mobile       |
+| :----: | :---------: | :----:       |
+|   Java |    React    | React Native |
+|        |    Vite     | Expo         |
 |        | TypeScript  |        |
 |        | TailwindCss |        |
 |        |             |        |
