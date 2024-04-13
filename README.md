@@ -25,12 +25,40 @@
 - Para executar o código localmente, clone o repositório.
 
   #### Frontend
-- Abra a pasta do projeto nlw-unite-react, no terminal execute os comandos:
+- Abra a pasta do projeto PassIn-nlw-unite-react, no terminal execute os comandos:
   - npm install
   - npm run dev ( para rodar a aplicação)
 
   #### Backend
- 
+- No editor escolha o projeto nlw-unite-java.
+- Ao rodar a aplicação alguns dados são adicionados ao BD.
+
+  #### Modelo para inserir dados pelo Insomnia
+##### Criar evento
+- http://localhost:8080/events
+```
+{
+  "title": "Palestra Dia Feliz",
+  "details": "Palestra realizada em Petrópolis.",
+  "slug":"teste",
+  "maximumAttendees": 2000
+}
+ ```
+- pegar o id q foi gerado ao obter sucesso na criação do evento, ele será utilizado como Id_do_evento.
+
+##### Adicionar participante ao evento
+- http://localhost:8080/events/{id_do_evento}/attendees
+
+```
+{
+  "name": "Carla Castro",
+  "email": "carla@rocketseat.com.br"
+}
+```
+
+##### Get todos os participantes vinculados ao evento
+- http://localhost:8080/events/attendees/{id_do_evento}
+  
 ### Pacotes Frontend:
 
 - Lucide (pacote de ícones):
