@@ -1,10 +1,10 @@
 //arquivo interpretado/reconhecido pelo expo router como arquivo de configuração das minhas rotas.
 //centralizo as configurações que quero compartilhar com todas as minhas rotas
 
-import "../styles/global.css";
+import "@/styles/global.css";
 import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Loading } from "../components/loading";
+import { Loading } from "@/components/loading";
 
 // Fontes
 import {
