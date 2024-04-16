@@ -3,7 +3,7 @@
 
 import "@/styles/global.css";
 import { Slot } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+
 import { Loading } from "@/components/loading";
 
 // Fontes
@@ -23,7 +23,6 @@ export default function Layout() {
 
   return (
     <>
-      <StatusBar style="light" />
       {fontsLoaded ? <Slot /> : <Loading />}
     </>
   ); // o Slot pega todas as minhas rotas e repassa
